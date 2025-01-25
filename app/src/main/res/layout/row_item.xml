@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Egyes ShoppingItem-ek a főldalon.
+  Egy kép (ImageView), 2db TextView az adattagoknak (itt szükséges a bővítés, ha új adattagjai lesznek)
+  És egy CheckBox a bought adattagnak, 2 gomb (edit, delete)
+  -->
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    card_view:cardBackgroundColor="#fff6a0"
+    card_view:cardCornerRadius="4dp"
+    card_view:cardElevation="4dp">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FBE9E7"
+        app:layout_constraintBottom_toBottomOf="@+id/tvQuantity"
+        app:layout_constraintTop_toBottomOf="@+id/tvQuantity">
+
+        <Button
+            android:id="@+id/btnEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#C5CAE9"
+            android:text="Edit"
+            android:textColor="#1A237E"
+            android:textStyle="bold"
+            app:fontFamily="@font/playwritegbj_variablefont_wght"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btnDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#C5CAE9"
+            android:text="Delete"
+            android:textColor="#1A237E"
+            android:textStyle="bold"
+            app:fontFamily="@font/playwritegbj_variablefont_wght"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <CheckBox
+            android:id="@+id/cbBought"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="92dp"
+            android:layout_marginRight="92dp"
+            android:text="Bought"
+            android:textColor="#880E4F"
+            android:textStyle="bold"
+            app:fontFamily="@font/playwritegbj_variablefont_wght"
+            app:layout_constraintEnd_toStartOf="@+id/btnDelete"
+            app:layout_constraintTop_toBottomOf="@+id/tvWhy" />
+
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="41dp"
+            android:textColor="#880E4F"
+            android:textStyle="bold"
+            app:fontFamily="@font/playwritegbj_variablefont_wght"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textView"
+            tools:text="Popcorn" />
+
+        <TextView
+            android:id="@+id/tvPrice"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="8dp"
+            android:textColor="#880E4F"
+            app:fontFamily="@font/playwritegbj_variablefont_wght"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="@+id/tvName"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvName"
+            tools:text="2523" />
+
+        <TextView
+            android:id="@+id/tvQuantity"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_marginRight="8dp"
+            android:textColor="#880E4F"
+            app:fontFamily="@font/playwritegbj_variablefont_wght"
+            card_view:layout_constraintHorizontal_bias="0.0"
+            card_view:layout_constraintLeft_toLeftOf="@+id/tvName"
+            card_view:layout_constraintRight_toRightOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@+id/tvName"
+            tools:text="2523" />
+
+        <TextView
+            android:id="@+id/tvWhy"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="104dp"
+            android:layout_marginRight="8dp"
+            android:textColor="#880E4F"
+            app:fontFamily="@font/playwritegbj_variablefont_wght"
+            card_view:layout_constraintHorizontal_bias="0.0"
+            card_view:layout_constraintLeft_toLeftOf="@+id/tvName"
+            card_view:layout_constraintRight_toRightOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@+id/tvName"
+            tools:text="2523" />
+
+        <TextView
+            android:id="@+id/tvShop"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="72dp"
+            android:layout_marginRight="8dp"
+            android:textColor="#880E4F"
+            app:fontFamily="@font/playwritegbj_variablefont_wght"
+            card_view:layout_constraintHorizontal_bias="0.0"
+            card_view:layout_constraintLeft_toLeftOf="@+id/tvName"
+            card_view:layout_constraintRight_toRightOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@+id/tvName"
+            tools:text="2523" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="80dp"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="4dp"
+            android:text="Shopping list"
+            android:textColor="#D81B60"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:fontFamily="@font/playwritegbj_variablefont_wght"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.v7.widget.CardView>
+
