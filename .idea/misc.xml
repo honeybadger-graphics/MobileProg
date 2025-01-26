@@ -8,6 +8,7 @@
         <entry key="..\:/Users/smkle/Desktop/KotlinShoppingList_Gy_2/app/src/main/res/layout/dialog_create_item.xml" value="0.18802083333333333" />
         <entry key="..\:/Users/smkle/Desktop/KotlinShoppingList_Gy_2/app/src/main/res/layout/row_item.xml" value="0.25" />
         <entry key="..\:/Users/smkle/Desktop/KotlinShoppingList_Gy_2/app/src/main/res/layout/row_item_b.xml" value="0.17798913043478262" />
+        <entry key="..\:/Users/smkle/Documents/GitHub/MobileProg/app/src/main/res/layout/row_item.xml" value="0.1" />
         <entry key="..\:/mobil_msc/Android-Kotlin-BME/03/KotlinShoppingList/app/src/main/res/layout/activity_main.xml" value="0.16" />
         <entry key="..\:/mobil_msc/Android-Kotlin-BME/03/KotlinShoppingList/app/src/main/res/layout/constratint_demo.xml" value="0.1" />
         <entry key="..\:/mobil_msc/Android-Kotlin-BME/03/KotlinShoppingList/app/src/main/res/layout/content_main.xml" value="0.1" />
@@ -68,6 +69,10 @@
         </list>
       </value>
     </option>
+  </component>
+  <component name="ProjectPlainTextFileTypeManager">
+    <file url="file://$PROJECT_DIR$/app/src/main/java/hu/aut/android/kotlinshoppinglist/data/AppDatabase.kt" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/hu/aut/android/kotlinshoppinglist/data/ShoppingItemDAO.kt" />
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />

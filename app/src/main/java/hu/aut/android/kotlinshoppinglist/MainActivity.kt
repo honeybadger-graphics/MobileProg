@@ -12,7 +12,9 @@ import android.content.SharedPreferences
 import android.preference.PreferenceManager
 import android.support.v7.widget.helper.ItemTouchHelper
 import android.view.View
-import hu.aut.android.kotlinshoppinglist.data.AppDatabase
+//import hu.aut.android.kotlinshoppinglist.data.AppDatabase
+import hu.aut.android.kotlinshoppinglist.data.DatabaseHandler
+
 import hu.aut.android.kotlinshoppinglist.data.ShoppingItem
 import hu.aut.android.kotlinshoppinglist.touch.ShoppingTouchHelperCallback
 import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt
@@ -25,6 +27,7 @@ Ez a fő, main.
 Itt nem szükséges módosítani a Shopping Item-hez ha új adattagot adunk.
  */
 class MainActivity : AppCompatActivity(), ShoppingItemDialog.ShoppingItemHandler {
+   var dbHandler: DatabaseHandler? = null
     companion object {
         val KEY_FIRST = "KEY_FIRST"
         val KEY_ITEM_TO_EDIT = "KEY_ITEM_TO_EDIT"
@@ -38,7 +41,7 @@ class MainActivity : AppCompatActivity(), ShoppingItemDialog.ShoppingItemHandler
         super.onCreate(savedInstanceState)
         // Activity-main.xml-t hozza be
         setContentView(R.layout.activity_main)
-
+        dbHandler = DatabaseHandler(this)
         setSupportActionBar(toolbar)
         //Új elem hozzáadásakor hívódik meg, a rózsaszín levél ikonos gomb eseménykezelője
         //A ShoppingTimeDialog-ot hívja meg (jeleníti meg)
@@ -79,7 +82,8 @@ class MainActivity : AppCompatActivity(), ShoppingItemDialog.ShoppingItemHandler
     private fun initRecyclerView() {
         val dbThread = Thread {
             //Lekéri az összes Shopping Item-et.
-            val items = AppDatabase.getInstance(this).shoppingItemDao().findAllItems()
+            val items = dbHandler!!.task()
+                //AppDatabase.getInstance(this).shoppingItemDao().findAllItems()
 
             runOnUiThread{
                 adapter = ShoppingAdapter(this, items)
@@ -106,9 +110,9 @@ class MainActivity : AppCompatActivity(), ShoppingItemDialog.ShoppingItemHandler
 /*Új Shopping Item-kor beszúrjuk a DB-be a DAO segítségével*/
     override fun shoppingItemCreated(item: ShoppingItem) {
         val dbThread = Thread {
-            val id = AppDatabase.getInstance(this@MainActivity).shoppingItemDao().insertItem(item)
-
-            item.itemId = id
+            //val id = AppDatabase.getInstance(this@MainActivity).shoppingItemDao().insertItem(item)
+                dbHandler!!.addShopItem(item)
+           // item.itemId = id
 
             runOnUiThread{
                 adapter.addItem(item)
@@ -121,8 +125,8 @@ class MainActivity : AppCompatActivity(), ShoppingItemDialog.ShoppingItemHandler
         adapter.updateItem(item)
 
         val dbThread = Thread {
-            AppDatabase.getInstance(this@MainActivity).shoppingItemDao().updateItem(item)
-
+            //AppDatabase.getInstance(this@MainActivity).shoppingItemDao().updateItem(item)
+            dbHandler!!.updateTask(item)
             runOnUiThread { adapter.updateItem(item) }
         }
         dbThread.start()

@@ -133,7 +133,7 @@ class ShoppingItemDialog : DialogFragment() {
         itemToEdit.price = etPrice.text.toString().toInt()
         itemToEdit.quantity=etQuantity.text.toString().toInt()
         itemToEdit.shop=etShop.text.toString()
-        itemToEdit.why=etShop.text.toString()
+        itemToEdit.why=etWhy.text.toString()
 
         shoppingItemHandler.shoppingItemUpdated(itemToEdit)
     }

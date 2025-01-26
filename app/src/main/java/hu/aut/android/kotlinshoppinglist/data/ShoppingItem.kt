@@ -14,7 +14,8 @@ Oszlopok:itemId, name,  price, bought.
 Ide szükséges a bővítés új adattal.
  */
 @Entity(tableName = "shoppingitem")
-data class ShoppingItem(@PrimaryKey(autoGenerate = true) var itemId: Long?,
+data class ShoppingItem(
+    @PrimaryKey(autoGenerate = true) var itemId: Int?,
                         @ColumnInfo(name = "name") var name: String,
                         @ColumnInfo(name = "price") var price: Int,
                         @ColumnInfo(name = "bought") var bought: Boolean,

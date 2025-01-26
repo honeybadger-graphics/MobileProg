@@ -1,9 +1,10 @@
 package hu.aut.android.kotlinshoppinglist.adapter
 
 import android.content.Context
+import android.graphics.Color
+import android.support.constraint.ConstraintLayout
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
-import android.view.TextureView
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
@@ -12,7 +13,9 @@ import android.widget.TextView
 import hu.aut.android.kotlinshoppinglist.MainActivity
 import hu.aut.android.kotlinshoppinglist.R
 import hu.aut.android.kotlinshoppinglist.adapter.ShoppingAdapter.ViewHolder
-import hu.aut.android.kotlinshoppinglist.data.AppDatabase
+import hu.aut.android.kotlinshoppinglist.data.DatabaseHandler
+//import hu.aut.android.kotlinshoppinglist.data.AppDatabase
+
 import hu.aut.android.kotlinshoppinglist.data.ShoppingItem
 import hu.aut.android.kotlinshoppinglist.touch.ShoppingTouchHelperAdapter
 import kotlinx.android.synthetic.main.row_item.view.*
@@ -22,8 +25,8 @@ class ShoppingAdapter : RecyclerView.Adapter<ViewHolder>, ShoppingTouchHelperAda
     /* ShoppingItem elemek listája*/
     private val items = mutableListOf<ShoppingItem>()
     private val context: Context
-
-    constructor(context: Context, items: List<ShoppingItem>) : super() {
+    var dbHandler: DatabaseHandler? = null
+    constructor(context: Context, items: List<ShoppingItem> ) : super() {
         this.context = context
         this.items.addAll(items)
     }
@@ -40,6 +43,7 @@ class ShoppingAdapter : RecyclerView.Adapter<ViewHolder>, ShoppingTouchHelperAda
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        dbHandler = DatabaseHandler(context)
         /*Itt kérjük le az egyes ShoppingItem elemek adattagjait, itt is szükséges az adattaggal a bővítés*/
         holder.tvName.text = items[position].name
         holder.tvPrice.text = items[position].price.toString() + "Ft"
@@ -61,9 +65,16 @@ class ShoppingAdapter : RecyclerView.Adapter<ViewHolder>, ShoppingTouchHelperAda
          */
         holder.cbBought.setOnClickListener {
             items[position].bought = holder.cbBought.isChecked
+            if (items[position].bought) {
+                holder.constraintCL.setBackgroundColor(Color.parseColor("#34eb4f"))
+            }
+            else{
+                holder.constraintCL.setBackgroundColor(Color.parseColor("#FBE9E7"))
+            }
             val dbThread = Thread {
                 //Itt frissíti a DB-ben
-                AppDatabase.getInstance(context).shoppingItemDao().updateItem(items[position])
+                dbHandler!!.updateTask(items[position])
+                //AppDatabase.getInstance(context).shoppingItemDao().updateItem(items[position])
             }
             dbThread.start()
         }
@@ -76,8 +87,8 @@ class ShoppingAdapter : RecyclerView.Adapter<ViewHolder>, ShoppingTouchHelperAda
     /*Elem törlésekor hívódik meg. Az adatbázisból törli az elemet (DAO-n keresztül)*/
     fun deleteItem(position: Int) {
         val dbThread = Thread {
-            AppDatabase.getInstance(context).shoppingItemDao().deleteItem(
-                    items[position])
+            dbHandler!!.deleteTask(position)
+            //AppDatabase.getInstance(context).shoppingItemDao().deleteItem( items[position])
             (context as MainActivity).runOnUiThread{
                 items.removeAt(position)
                 notifyItemRemoved(position)
@@ -113,5 +124,6 @@ class ShoppingAdapter : RecyclerView.Adapter<ViewHolder>, ShoppingTouchHelperAda
         val cbBought: CheckBox = itemView.cbBought
         val btnDelete: Button = itemView.btnDelete
         val btnEdit: Button = itemView.btnEdit
+        val constraintCL: ConstraintLayout = itemView.constraintCL
     }
 }
